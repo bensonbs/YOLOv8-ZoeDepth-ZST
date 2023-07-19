@@ -1,12 +1,21 @@
 # YOLOv8-ZoeDepth-ZST
-
 ## 簡介
 此API使用了基於Pytorch的YOLO模型進行影像中的物件偵測。
 我們支援兩種版本的YOLO，
 - `YOLOv5`
 - `YOLOv8`
 
-此外，還可以選擇使用`ZoeDepth`模型進行物件深度的估算。
+此外，還可以選擇使用`ZoeDepth`模型進行**物件深度的估算**。
+<p float="left">
+  <img src="./yolov5-ZoeDepth_ZST.png" width="500" />
+  <img src="./yolov8-ZoeDepth_ZST.png" width="500" /> 
+  <br>
+  <i>YOLOv5(左)  與  YOLOv8-seg(右) ZoeDepth深度估計</i>
+</p>
+
+## 模型下載
+[ZoeDepth](https://github.com/isl-org/ZoeDepth/releases/download/v1.0/ZoeD_M12_N.pt) 放置於`./hub/checkpoints/ZoeD_M12_N.pt`
+Yolov5,v8模型放置於`./models`
 
 ## API端點
 以下是此API的主要端點:
@@ -33,43 +42,54 @@
 回傳格式: JSON
 - 回傳內容: 每一個偵測到的物件都會有一個字典，字典的鍵包含 `name`、`class`、`confidence`、`xmin`、`ymin`、`xmax`、`ymax`
 - 使用深度估算時會有 `deep`。
+    - Yolov5 計算`bbox`內的深度中位數
+    - Yolov8 計算`keypoints`(mask)所還蓋範圍內深度平均數
 - 如果使用的是YOLOv8，還會包含 `keypoints`。
 
-## Demo.ipynb
-**使用Yolov5偵測物體bbox後，將擷取bbox內深度資訊中位數，顯示於DS**
+## 啟動方式
+**可以在命令行介面下使用以下指令啟動此API:**
+```shell
+python main.py --device [運行設備] --port [端口]
 ```
-version = 'v5'
-Model_name = 'TC3-PPE_Detector_v3.pt'
-Deep_model = True
+其中，運行設備可以選擇 `cuda:0` 或 `cpu`，端口可以選擇例如 `5001` 或 `5002`。
 
-r = requests.post('http://127.0.0.1:5001/upload', 
-json = {
-    'base64_str':f'{img_base64}',
-    'Model_name': Model_name,
-    'Deep_model':Deep_model,
-    'version':'v5'
-})
+## 範例
+**請求範例**
 
-dic = json.loads(r.text)
-dicplot(image,dic,version)
+```shell
+curl -X POST "http://localhost:5001/upload" \
+-H "Content-Type: application/json" \
+-d '{
+    "Model_name": "yolov5s",
+    "base64_str": "data:image/jpeg;base64,/9j/4AAQSk...",
+    "Deep_model": "True",
+    "version": "v5"
+}'
+
 ```
-![Optional alt text](./yolov5-ZoeDepth_ZST.png)
 
-**使用Yolov8-seg偵測物體keypoint後，將擷取mask內深度資訊平均數，顯示於DS**
+**回應範例**
+```json
+{
+    "0": {
+        "name": "person",
+        "class": "0",
+        "confidence": "0.99",
+        "xmin": "116.52",
+        "ymin": "34.41",
+        "xmax": "167.94",
+        "ymax": "224.88",
+        "deep": "65"
+    },
+    "1": {
+        "name": "bicycle",
+        "class": "1",
+        "confidence": "0.87",
+        "xmin": "201.72",
+        "ymin": "120.28",
+        "xmax": "295.03",
+        "ymax": "203.18",
+        "deep": "77"
+    }
+}
 ```
-version = 'v8'
-Model_name = 'best.pt'
-Deep_model = True
-
-r = requests.post('http://127.0.0.1:5001/upload', 
-json = {
-    'base64_str':f'{img_base64}',
-    'Model_name': Model_name,
-    'Deep_model':Deep_model,
-    'version':version
-})
-
-dic = json.loads(r.text)
-dicplot(image,dic,version)
-```
-![Optional alt text](./yolov8-ZoeDepth_ZST.png)
