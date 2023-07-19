@@ -29,8 +29,8 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 *請注意，你需要有一個支援CUDA的圖形處理器(GPU)才能使用這個指令。如果你的設備不支援CUDA，你可能需要安裝不支援CUDA的PyTorch版本。
 
 ## 模型下載
-[ZoeDepth](https://github.com/isl-org/ZoeDepth/releases/download/v1.0/ZoeD_M12_N.pt) 放置於`./hub/checkpoints/ZoeD_M12_N.pt`
-Yolov5,v8模型放置於`./models`
+- [ZoeDepth](https://github.com/isl-org/ZoeDepth/releases/download/v1.0/ZoeD_M12_N.pt) 放置於`./hub/checkpoints/ZoeD_M12_N.pt`
+- Yolov5, v8模型放置於`./models`，如: `./models/yolov8-seg.pt`
 
 ## API端點
 以下是此API的主要端點:
