@@ -10,6 +10,24 @@
   <i>YOLOv5(上)  與  YOLOv8-seg(下) ZoeDepth深度估計</i>
 </p>
 
+## 安裝說明
+**請依照以下步驟進行環境設定與相依套件的安裝。**
+
+1. 安裝相依套件
+首先，你需要安裝相依套件。在你的終端機中輸入下面的指令來安裝所有需要的Python套件：
+
+```bash
+pip install -r requirements.txt
+```
+
+2. 安裝PyTorch與CUDA支援
+接著，你需要安裝支援CUDA的PyTorch。你可以使用以下的指令來安裝：
+
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
+```
+*請注意，你需要有一個支援CUDA的圖形處理器(GPU)才能使用這個指令。如果你的設備不支援CUDA，你可能需要安裝不支援CUDA的PyTorch版本。
+
 ## 模型下載
 [ZoeDepth](https://github.com/isl-org/ZoeDepth/releases/download/v1.0/ZoeD_M12_N.pt) 放置於`./hub/checkpoints/ZoeD_M12_N.pt`
 Yolov5,v8模型放置於`./models`
@@ -24,7 +42,7 @@ Yolov5,v8模型放置於`./models`
 
 方法: POST
 回傳格式: JSON
-回傳內容: 一個字典，鍵為模型名稱，值為'available'
+回傳內容: 一個字典，鍵為模型名稱，值為`available`
 
 ## 端點 /upload
 **此端點接受上傳的圖片並進行物件偵測。**
@@ -32,9 +50,9 @@ Yolov5,v8模型放置於`./models`
 方法: POST
 參數:
 - Model_name: 選擇YOLO模型名稱，需符合當前可用模型列表的模型名稱。
-- base64_str: 圖片的base64編碼字串，需包含 data:image/[image format];base64, 的前綴，例如 data:image/jpeg;base64,/9j/4AAQSk...
-- Deep_model: 選擇是否使用ZoeDepth模型進行深度估算，需傳入Python的bool值字串，例如 "True" 或 "False"。
-- version: YOLO模型版本，目前支援 "v5" 或 "v8"。
+- base64_str: 圖片的base64編碼字串，需包含 `data:image/[image format];base64`, 的前綴，例如 `data:image/jpeg;base64,/9j/4AAQSk...`
+- Deep_model: 選擇是否使用ZoeDepth模型進行深度估算，需傳入Python的bool值字串，例如 `True` 或 `False`。
+- version: YOLO模型版本，目前支援 `v5` 或 `v8`。
 
 回傳格式: JSON
 - 回傳內容: 每一個偵測到的物件都會有一個字典，字典的鍵包含 `name`、`class`、`confidence`、`xmin`、`ymin`、`xmax`、`ymax`
