@@ -7,7 +7,7 @@
   <img src="./yolov5-ZoeDepth_ZST.png" width="1500" />
   <img src="./yolov8-ZoeDepth_ZST.png" width="1500" /> 
   <br>
-  <i>YOLOv5(左)  與  YOLOv8-seg(右) ZoeDepth深度估計</i>
+  <i>YOLOv5(上)  與  YOLOv8-seg(下) ZoeDepth深度估計</i>
 </p>
 
 ## 模型下載
