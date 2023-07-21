@@ -18,7 +18,10 @@ thop>=0.1.1  # FLOPs computation
 tqdm>=4.64.0
 ultralytics>=8.0.111
 setuptools>=65.5.1 # Snyk vulnerability fix
-
+uvicorn
+fastapi
+timm==0.6.7
+protobuf==3.20.1
 
 # Logging ---------------------------------------------------------------------
 # tensorboard>=2.4.1
