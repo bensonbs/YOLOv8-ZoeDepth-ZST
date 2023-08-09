@@ -58,8 +58,8 @@ pip install torch torchvision torchaudio --index-url https://download.pytorch.or
 回傳格式: JSON
 - 回傳內容: 每一個偵測到的物件都會有一個字典，字典的鍵包含 `name`、`class`、`confidence`、`xmin`、`ymin`、`xmax`、`ymax`
 - 使用深度估算時會有 `deep`。
-    - Yolov5 計算`bbox`內的深度中位數
-    - Yolov8 計算`keypoints`(mask)所還蓋範圍內深度平均數
+    - **Yolov5計算`bbox`內的深度中位數**
+    - **Yolov8計算`keypoints`(mask)所還蓋範圍內深度平均數**
 - 如果使用的是YOLOv8，還會包含 `keypoints`。
 
 ## 啟動方式
