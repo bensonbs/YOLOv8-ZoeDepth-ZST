@@ -4,6 +4,7 @@
 **此API使用了基於Pytorch的YOLO模型進行影像中的物件偵測。我們支援兩種版本的YOLO，分別是[YOLOv5](https://github.com/ultralytics/yolov5)和[YOLOv8](https://github.com/ultralytics/ultralytics)。除此之外，我們也提供了選擇性的[深度估計模型](https://github.com/isl-org/ZoeDepth)以進行影像中物體的深度估計。**
 
 <p float="left">
+  <img src="./zoedepth-teaser.png" width="1500" />
   <img src="./yolov5-ZoeDepth_ZST.png" width="1500" />
   <img src="./yolov8-ZoeDepth_ZST.png" width="1500" /> 
   <br>
